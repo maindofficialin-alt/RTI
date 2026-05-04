@@ -57,3 +57,17 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
 }
+
+/* Hide potential injected platform badges (Lovable, Netlify, etc.) */
+iframe[src*="lovable"], 
+div[class*="lovable"], 
+div[id*="lovable"],
+.netlify-badge,
+[data-netlify-identity-menu],
+nextjs-static-indicator,
+nextjs-portal,
+#nextjs-portal {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}

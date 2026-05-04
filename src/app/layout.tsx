@@ -52,13 +52,28 @@ export default function RootLayout({
               <Link href="/departments" className="hover:text-primary transition-colors">Departments</Link>
             </nav>
 
-            <div className="flex items-center gap-4">
-              <button className="p-2 text-muted-foreground hover:text-primary transition-colors">
-                <Search className="h-5 w-5" />
-              </button>
-              <button className="hidden md:block px-4 py-2 text-sm font-semibold text-primary border border-primary rounded-full hover:bg-primary hover:text-white transition-all">
+            <div className="flex items-center gap-6">
+              {/* Language Toggle */}
+              <div className="hidden sm:flex items-center bg-gray-100 rounded-full p-1 text-xs font-bold">
+                <button className="px-3 py-1 bg-white text-primary rounded-full shadow-sm">EN</button>
+                <button className="px-3 py-1 text-gray-500 hover:text-primary transition-colors">తెలుగు</button>
+              </div>
+
+              <div className="relative hidden lg:block group">
+                <input 
+                  type="text" 
+                  placeholder="Search RTI applications, departments..." 
+                  className="w-64 pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-sm focus:w-80 transition-all focus:ring-2 focus:ring-primary/10 outline-none"
+                />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400 group-focus-within:text-primary" />
+              </div>
+
+              <Link href="/login" className="hidden lg:block px-4 py-2 text-sm font-bold text-secondary border border-secondary/30 rounded-full hover:bg-secondary hover:text-white transition-all">
+                Demo Login
+              </Link>
+              <Link href="/login" className="hidden md:block px-4 py-2 text-sm font-bold text-white bg-primary rounded-full hover:bg-primary-dark transition-all shadow-md shadow-primary/20">
                 Login / Register
-              </button>
+              </Link>
               <button className="md:hidden p-2">
                 <Menu className="h-6 w-6" />
               </button>
