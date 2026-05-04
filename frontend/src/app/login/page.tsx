@@ -5,30 +5,52 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { User, Lock, ArrowRight, Shield } from "lucide-react";
 import Link from "next/link";
+import { apiRequest, saveAuth } from "@/lib/api";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
   const router = useRouter();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    // Mock login logic
-    setTimeout(() => {
-      const trimmedEmail = email.trim();
-      const trimmedPassword = password.trim();
-      
-      if (trimmedEmail === "admin@gmail.com" && (trimmedPassword === "Admin" || trimmedPassword === "Admin @369")) {
+    setError("");
+    try {
+      const data = await apiRequest("/auth/login", {
+        method: "POST",
+        body: JSON.stringify({ email: email.trim(), password: password.trim() }),
+      });
+      saveAuth(data.token, data.user);
+      if (data.user.role === "admin") {
         router.push("/dashboard?role=admin");
-      } else if (trimmedEmail === "srinivas@example.com" && trimmedPassword === "password123") {
-        router.push("/dashboard");
       } else {
-        alert("Invalid credentials. Try admin@gmail.com / Admin");
-        setIsLoading(false);
+        router.push("/dashboard");
       }
-    }, 1500);
+    } catch (err: any) {
+      setError(err.message || "Invalid credentials");
+      setIsLoading(false);
+    }
+  };
+
+  const quickLogin = async (qEmail: string, qPassword: string, role: string) => {
+    setIsLoading(true);
+    setError("");
+    setEmail(qEmail);
+    setPassword(qPassword);
+    try {
+      const data = await apiRequest("/auth/login", {
+        method: "POST",
+        body: JSON.stringify({ email: qEmail, password: qPassword }),
+      });
+      saveAuth(data.token, data.user);
+      router.push(role === "admin" ? "/dashboard?role=admin" : "/dashboard");
+    } catch (err: any) {
+      setError(err.message || "Login failed");
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -51,6 +73,12 @@ export default function LoginPage() {
             Secure login to your RTI citizen account
           </p>
         </div>
+
+        {error && (
+          <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm font-medium text-center">
+            {error}
+          </div>
+        )}
 
         <form className="mt-8 space-y-6" onSubmit={handleLogin}>
           <div className="space-y-4">
@@ -136,14 +164,7 @@ export default function LoginPage() {
             <button
               type="button"
               disabled={isLoading}
-              onClick={() => {
-                setIsLoading(true);
-                setEmail("admin@gmail.com");
-                setPassword("Admin @369");
-                setTimeout(() => {
-                  router.push("/dashboard?role=admin");
-                }, 800);
-              }}
+              onClick={() => quickLogin("admin@gmail.com", "Admin@369", "admin")}
               className="w-full flex justify-center py-4 px-4 border-2 border-primary/20 text-xs font-black rounded-xl text-primary bg-white hover:bg-primary hover:text-white transition-all shadow-sm"
             >
               Quick Admin Access
@@ -152,14 +173,7 @@ export default function LoginPage() {
             <button
               type="button"
               disabled={isLoading}
-              onClick={() => {
-                setIsLoading(true);
-                setEmail("srinivas@example.com");
-                setPassword("password123");
-                setTimeout(() => {
-                  router.push("/dashboard");
-                }, 800);
-              }}
+              onClick={() => quickLogin("srinivas@example.com", "password123", "citizen")}
               className="w-full flex justify-center py-4 px-4 border-2 border-secondary/20 text-xs font-black rounded-xl text-secondary bg-white hover:bg-secondary hover:text-white transition-all shadow-sm"
             >
               Citizen Demo Access
@@ -169,7 +183,7 @@ export default function LoginPage() {
 
         <div className="text-center mt-6">
           <p className="text-sm text-gray-600">
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <Link href="#" className="font-bold text-primary hover:text-primary-light">
               Register here
             </Link>

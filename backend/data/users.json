@@ -1,0 +1,18 @@
+[
+  {
+    "id": "9d867512-b192-400f-ae6e-2b88faf5eddf",
+    "name": "Admin",
+    "email": "admin@gmail.com",
+    "password": "$2a$10$vJSP.XBN1Dl1JLhSafPIPu7mj8mXLChzB7EBD3HhXQ7z7Jtujkj2W",
+    "role": "admin",
+    "createdAt": "2026-05-04T18:23:49.809Z"
+  },
+  {
+    "id": "daf3a7bb-2e39-419b-91bc-d036f7f9f366",
+    "name": "Srinivas Kumar",
+    "email": "srinivas@example.com",
+    "password": "$2a$10$vJSP.XBN1Dl1JLhSafPIPu6XN2W2Ex3KPz3qqheCOs.stJHU0NZOO",
+    "role": "citizen",
+    "createdAt": "2026-05-04T18:23:49.885Z"
+  }
+]

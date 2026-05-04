@@ -1,0 +1,31 @@
+[
+  {
+    "id": "57d0d09b-243f-416a-b00b-86acfadd624e",
+    "registrationNumber": "TSRTI/2026/001",
+    "userId": "demo",
+    "applicantName": "John Doe",
+    "email": "john@example.com",
+    "phone": "9876543210",
+    "address": "123 Main St, Hyderabad",
+    "departmentId": "dept-10",
+    "departmentName": "Higher Education",
+    "pioId": "pio-19",
+    "pioName": "Shri. S. Kumar",
+    "subject": "Information about scholarship disbursement",
+    "description": "Requesting details of scholarship amounts disbursed in 2025-26.",
+    "status": "Pending",
+    "documents": [],
+    "timeline": [
+      {
+        "date": "2026-04-16",
+        "message": "Application received and assigned to PIO."
+      },
+      {
+        "date": "2026-04-15",
+        "message": "Application submitted online."
+      }
+    ],
+    "createdAt": "2026-04-15T10:00:00Z",
+    "updatedAt": "2026-04-16T09:00:00Z"
+  }
+]
