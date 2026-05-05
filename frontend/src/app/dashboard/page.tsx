@@ -31,13 +31,13 @@ import { apiRequest, getUser, isLoggedIn, logout } from "@/lib/api";
 export default function Dashboard() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const isAdmin = searchParams.get("role") === "admin";
+  const [user, setUser] = useState<any>(null);
+  const isAdmin = searchParams.get("role") === "admin" || (user && user.role === "admin");
   const [selectedDept, setSelectedDept] = useState<string | null>(null);
   const [showSecurity, setShowSecurity] = useState(false);
   const [applications, setApplications] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedApp, setSelectedApp] = useState<any>(null);
-  const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
     if (!isLoggedIn()) {
