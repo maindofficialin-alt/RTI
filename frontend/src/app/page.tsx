@@ -211,9 +211,9 @@ export default function Home() {
                 <p className="text-xs text-blue-200 uppercase font-bold tracking-widest">Direct Escalation</p>
               </div>
             </div>
-            <button className="px-10 py-5 bg-secondary text-primary font-black rounded-2xl hover:bg-secondary-light transition-all shadow-xl shadow-secondary/20 flex items-center gap-3 mx-auto">
+            <Link href="/grievance" className="px-10 py-5 bg-secondary text-primary font-black rounded-2xl hover:bg-secondary-light transition-all shadow-xl shadow-secondary/20 flex items-center gap-3 mx-auto w-fit">
               Open Grievance Portal <ArrowRight className="h-5 w-5" />
-            </button>
+            </Link>
           </div>
         </div>
       </section>
