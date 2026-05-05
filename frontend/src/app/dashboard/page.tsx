@@ -134,200 +134,186 @@ export default function Dashboard() {
               animate={{ opacity: 1 }}
               className="space-y-8"
             >
-              {/* Admin KPI Header */}
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                {adminStats.map((stat, i) => (
-                  <motion.div 
-                    key={i} 
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.1 }}
-                    className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm hover:shadow-md transition-all group"
-                  >
-                    <div className="flex justify-between items-start mb-4">
-                      <div className="h-10 w-10 bg-gray-50 rounded-xl flex items-center justify-center text-gray-400 group-hover:bg-primary/5 group-hover:text-primary transition-colors">
-                        <stat.icon className="h-5 w-5" />
-                      </div>
-                      <span className={`text-[10px] font-black px-2 py-1 rounded-md ${stat.trend.includes('+') ? 'bg-emerald-50 text-emerald-600' : 'bg-rose-50 text-rose-600'}`}>
-                        {stat.trend}
-                      </span>
+              {/* PIO Header */}
+              <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm flex flex-col md:flex-row justify-between items-center gap-6">
+                 <div>
+                    <h2 className="text-2xl font-black text-gray-900">RTI Internal Dashboard</h2>
+                    <p className="text-sm font-bold text-gray-500">Telangana State — PIO Workstation</p>
+                 </div>
+                 <div className="flex items-center gap-4">
+                    <div className="text-right">
+                       <div className="text-sm font-black text-gray-900">K. Ramaiah, PIO</div>
+                       <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Employee ID: TS-9821</div>
                     </div>
-                    <div className="text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1">{stat.label}</div>
-                    <div className={`text-2xl font-black ${stat.color}`}>{stat.value}</div>
-                  </motion.div>
-                ))}
+                    <div className="h-12 w-12 bg-primary rounded-full flex items-center justify-center text-white font-black text-lg shadow-lg">KR</div>
+                 </div>
               </div>
 
-              {/* Next-Gen Admin Toolkit */}
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div className="lg:col-span-2 space-y-8">
-                  <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm">
-                    <div className="flex items-center justify-between mb-10">
-                      <div>
-                        <h2 className="text-xl font-black text-gray-900">AI Redaction Engine</h2>
-                        <p className="text-sm text-gray-500">Auto-identifying and masking sensitive data across departments.</p>
-                      </div>
-                      <div className="flex items-center gap-2 text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest">
-                        <ShieldAlert className="h-4 w-4" /> System Active
-                      </div>
-                    </div>
-                    
-                    <div className="space-y-4">
-                      {[
-                        { file: "Financial_Audit_2025.pdf", dept: "Revenue", redactCount: 42, status: "Review Required" },
-                        { file: "Staff_Address_List.csv", dept: "Education", redactCount: 128, status: "Auto-Masked" },
-                        { file: "Bridge_Plan_Draft.jpg", dept: "PWD", redactCount: 0, status: "Clean" },
-                      ].map((item, i) => (
-                        <div key={i} className="p-4 bg-gray-50 rounded-2xl border border-gray-100 flex items-center justify-between group hover:border-primary/30 transition-all">
-                          <div className="flex items-center gap-4">
-                            <div className="h-10 w-10 bg-white rounded-xl flex items-center justify-center text-gray-400 group-hover:text-primary transition-colors">
-                              <FileText className="h-5 w-5" />
-                            </div>
-                            <div>
-                              <div className="text-sm font-bold text-gray-900">{item.file}</div>
-                              <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{item.dept} Department</div>
-                            </div>
-                          </div>
-                          <div className="flex items-center gap-6">
-                            <div className="text-center">
-                              <div className="text-xs font-black text-primary">{item.redactCount}</div>
-                              <div className="text-[8px] font-bold text-gray-400 uppercase">Flags</div>
-                            </div>
-                            <button className={`px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest ${
-                              item.status === 'Clean' ? 'bg-emerald-100 text-emerald-700' : 'bg-primary text-white'
-                            }`}>
-                              {item.status}
-                            </button>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm">
-                    <h2 className="text-xl font-black text-gray-900 mb-8">Single-window Routing Insights</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                       <div className="space-y-6">
-                          <div className="p-6 bg-indigo-50 rounded-2xl border border-indigo-100">
-                             <div className="text-2xl font-black text-indigo-600 mb-1">94.2%</div>
-                             <div className="text-[10px] font-black text-indigo-400 uppercase tracking-widest">Auto-Routing Accuracy</div>
-                             <p className="text-xs text-indigo-600/70 mt-4 leading-relaxed">AI correctly identified target departments for 1.2M requests this month.</p>
-                          </div>
-                          <div className="p-6 bg-amber-50 rounded-2xl border border-amber-100">
-                             <div className="text-2xl font-black text-amber-600 mb-1">2.4 Hours</div>
-                             <div className="text-[10px] font-black text-amber-400 uppercase tracking-widest">Avg. Initial Assignment</div>
-                             <p className="text-xs text-amber-600/70 mt-4 leading-relaxed">Down from 72 hours since implementing NLP-based triage.</p>
-                          </div>
-                       </div>
-                       <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100">
-                          <h4 className="text-xs font-black text-gray-400 uppercase tracking-widest mb-4">Common Triage Conflict</h4>
-                          <div className="space-y-4">
-                             {[
-                               { label: "Revenue vs MAUD", val: 45, color: "bg-blue-500" },
-                               { label: "Home vs Law", val: 25, color: "bg-indigo-500" },
-                               { label: "Education vs BCW", val: 30, color: "bg-emerald-500" },
-                             ].map((risk, i) => (
-                               <div key={i} className="space-y-1.5">
-                                 <div className="flex justify-between text-[8px] font-black uppercase text-gray-500">
-                                   <span>{risk.label}</span>
-                                   <span>{risk.val}%</span>
-                                 </div>
-                                 <div className="h-1 w-full bg-gray-200 rounded-full overflow-hidden">
-                                   <div className={`h-full ${risk.color}`} style={{ width: `${risk.val}%` }} />
-                                 </div>
-                               </div>
-                             ))}
-                          </div>
-                          <button className="w-full mt-6 py-3 bg-white text-primary border border-gray-200 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-gray-50 transition-all">Refine NLP Model</button>
+              {/* Top Stats Row */}
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                 {[
+                   { label: "Total pending", val: "84", sub: "12 due today", color: "text-gray-900", bg: "bg-white" },
+                   { label: "Overdue", val: "19", sub: "Action needed", color: "text-rose-600", bg: "bg-rose-50/30 border-rose-100" },
+                   { label: "Resolved (month)", val: "143", sub: "+8% vs last month", color: "text-emerald-600", bg: "bg-white" },
+                   { label: "Avg response", val: "18d", sub: "Target: 30d", color: "text-amber-600", bg: "bg-white" },
+                   { label: "First appeals", val: "11", sub: "3 pending reply", color: "text-rose-600", bg: "bg-white" },
+                 ].map((stat, i) => (
+                    <div key={i} className={`p-6 rounded-3xl border border-gray-100 shadow-sm ${stat.bg}`}>
+                       <div className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">{stat.label}</div>
+                       <div className={`text-3xl font-black ${stat.color} mb-1`}>{stat.val}</div>
+                       <div className={`text-[10px] font-bold ${stat.sub.includes('+') ? 'text-emerald-600' : (stat.sub.includes('Action') ? 'text-rose-500' : 'text-gray-400')}`}>
+                          {stat.sub}
                        </div>
                     </div>
-                  </div>
-                </div>
+                 ))}
+              </div>
 
-                <div className="space-y-8">
-                  <div className="bg-rose-50 p-8 rounded-3xl border border-rose-100 shadow-sm">
-                    <h2 className="text-lg font-black text-rose-600 mb-8 flex items-center gap-2">
-                      <Clock className="h-5 w-5" /> Deadline Alerts
-                    </h2>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                 {/* My Queue */}
+                 <div className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden flex flex-col">
+                    <div className="p-8 border-b border-gray-50 flex justify-between items-center">
+                       <h3 className="text-lg font-black text-gray-900 uppercase tracking-tight">My Queue</h3>
+                       <button className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline">View All</button>
+                    </div>
+                    <div className="flex-grow">
+                       {[
+                         { id: "RTI-2026-04821", dept: "Roads & Buildings", status: "Overdue 5d", color: "rose" },
+                         { id: "RTI-2026-04834", dept: "Revenue Dept", status: "Due in 2d", color: "amber" },
+                         { id: "RTI-2026-04851", dept: "GHMC", status: "New — 28d left", color: "blue" },
+                         { id: "RTI-2026-04799", dept: "Panchayat Raj", status: "Replied", color: "emerald" },
+                         { id: "RTI-2026-04712", dept: "Health & FW", status: "Overdue 11d", color: "rose" },
+                       ].map((item, i) => (
+                          <div key={i} className="p-6 border-b border-gray-50 last:border-0 hover:bg-gray-50 transition-all cursor-pointer group">
+                             <div className="flex justify-between items-center">
+                                <div>
+                                   <div className="text-sm font-black text-gray-900 group-hover:text-primary transition-colors">{item.id}</div>
+                                   <div className="text-xs font-bold text-gray-400">{item.dept}</div>
+                                </div>
+                                <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${
+                                   item.color === 'rose' ? 'bg-rose-50 text-rose-600' : 
+                                   (item.color === 'amber' ? 'bg-amber-50 text-amber-600' : 
+                                   (item.color === 'emerald' ? 'bg-emerald-50 text-emerald-600' : 'bg-blue-50 text-blue-600'))
+                                }`}>
+                                   {item.status}
+                                </span>
+                             </div>
+                          </div>
+                       ))}
+                    </div>
+                    <div className="p-4 flex justify-center">
+                       <div className="h-10 w-10 bg-gray-50 rounded-full flex items-center justify-center text-gray-400 cursor-pointer hover:bg-gray-100 shadow-inner">
+                          <ArrowRight className="h-5 w-5 rotate-90" />
+                       </div>
+                    </div>
+                 </div>
+
+                 {/* Alerts */}
+                 <div className="bg-white rounded-3xl border border-gray-100 shadow-sm flex flex-col">
+                    <div className="p-8 border-b border-gray-50">
+                       <h3 className="text-lg font-black text-gray-900 uppercase tracking-tight">Alerts</h3>
+                    </div>
+                    <div className="p-8 space-y-8 flex-grow">
+                       {[
+                         { title: "RTI-04821 is 5 days overdue — auto-escalation triggered to TSIC", time: "Today, 9:14 AM", color: "rose", action: true },
+                         { title: "3 requests due within 48 hours — respond before deadline", time: "Today, 8:00 AM", color: "amber" },
+                         { title: "First appeal RTI-04512 assigned for review by FAA", time: "Yesterday, 4:30 PM", color: "blue" },
+                         { title: "Monthly compliance report auto-generated and submitted", time: "May 1, 2026", color: "emerald" },
+                       ].map((alert, i) => (
+                          <div key={i} className="flex gap-4">
+                             <div className={`h-2.5 w-2.5 rounded-full mt-1.5 shrink-0 ${
+                                alert.color === 'rose' ? 'bg-rose-600' : 
+                                (alert.color === 'amber' ? 'bg-amber-500' : 
+                                (alert.color === 'emerald' ? 'bg-emerald-500' : 'bg-blue-500'))
+                             }`} />
+                             <div className="space-y-3 flex-grow">
+                                <div>
+                                   <div className="text-sm font-bold text-gray-700 leading-relaxed">{alert.title}</div>
+                                   <div className="text-[10px] font-bold text-gray-400 mt-1 uppercase tracking-widest">{alert.time}</div>
+                                </div>
+                                {alert.action && (
+                                   <button className="px-5 py-2.5 border-2 border-gray-100 text-gray-600 rounded-xl text-xs font-black hover:bg-gray-50 transition-all flex items-center gap-2">
+                                      Draft response <ArrowRight className="h-3 w-3" />
+                                   </button>
+                                )}
+                                {i < 3 && <div className="w-full h-px bg-gray-50 mt-8" />}
+                             </div>
+                          </div>
+                       ))}
+                    </div>
+                 </div>
+              </div>
+
+              {/* Workload & Category Analytics */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                 <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm">
+                    <h3 className="text-sm font-black text-gray-400 uppercase tracking-widest mb-8">Department Workload</h3>
                     <div className="space-y-6">
                        {[
-                         { id: "TSRTI/2026/044", time: "Expired 2 days ago", dept: "Municipal Admin", level: "Critical" },
-                         { id: "TSRTI/2026/128", time: "Due in 18 hours", dept: "Health & FW", level: "High" },
-                         { id: "TSRTI/2026/089", time: "Due in 3 days", dept: "Police Dept", level: "Warning" },
-                       ].map((alert, i) => (
-                         <div key={i} className="flex gap-4">
-                            <div className={`h-2 w-2 rounded-full mt-2 shrink-0 ${
-                              alert.level === 'Critical' ? 'bg-rose-600 animate-pulse' : (alert.level === 'High' ? 'bg-amber-500' : 'bg-blue-500')
-                            }`} />
-                            <div>
-                               <div className="text-[10px] font-black text-rose-600/60 uppercase">{alert.time}</div>
-                               <div className="font-bold text-gray-900 text-sm">{alert.id}</div>
-                               <div className="text-[10px] font-bold text-gray-400 uppercase">{alert.dept}</div>
-                            </div>
-                         </div>
+                         { name: "Roads & Buildi...", val: 23, total: 30, color: "bg-rose-500" },
+                         { name: "Revenue", val: 16, total: 30, color: "bg-amber-500" },
+                         { name: "GHMC", val: 14, total: 30, color: "bg-amber-500" },
+                         { name: "Panchayat Raj", val: 10, total: 30, color: "bg-blue-500" },
+                         { name: "Health & FW", val: 8, total: 30, color: "bg-blue-500" },
+                         { name: "Agriculture", val: 5, total: 30, color: "bg-emerald-500" },
+                         { name: "Others", val: 8, total: 30, color: "bg-gray-400" },
+                       ].map((dept, i) => (
+                          <div key={i} className="flex items-center gap-6">
+                             <div className="w-24 text-[11px] font-black text-gray-600 truncate">{dept.name}</div>
+                             <div className="flex-grow h-2 bg-gray-100 rounded-full overflow-hidden">
+                                <motion.div 
+                                   initial={{ width: 0 }}
+                                   animate={{ width: `${(dept.val / dept.total) * 100}%` }}
+                                   className={`h-full ${dept.color}`}
+                                />
+                             </div>
+                             <div className="w-4 text-xs font-black text-gray-900 text-right">{dept.val}</div>
+                          </div>
                        ))}
-                       <button className="w-full mt-4 py-4 bg-rose-600 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-rose-700 transition-all shadow-lg shadow-rose-200">Send Escalation Notices</button>
                     </div>
-                  </div>
+                 </div>
 
-                  <div className="bg-indigo-900 p-8 rounded-3xl text-white shadow-xl relative overflow-hidden">
-                    <Fingerprint className="absolute -bottom-4 -right-4 h-32 w-32 text-white/5" />
-                    <h3 className="text-xl font-black mb-4 relative z-10">Proactive Disclosure Control</h3>
-                    <p className="text-xs text-indigo-200 mb-8 leading-relaxed relative z-10">Configuring automatic publication of 128 "High Demand" datasets to the Public Archive.</p>
-                    <div className="space-y-4 relative z-10">
-                       <div className="flex items-center justify-between p-3 bg-white/10 rounded-xl">
-                          <span className="text-[10px] font-bold uppercase tracking-widest">Tender Archive</span>
-                          <div className="h-4 w-8 bg-emerald-500 rounded-full relative"><div className="absolute right-1 top-1 h-2 w-2 bg-white rounded-full" /></div>
-                       </div>
-                       <div className="flex items-center justify-between p-3 bg-white/10 rounded-xl">
-                          <span className="text-[10px] font-bold uppercase tracking-widest">Budget Live-sync</span>
-                          <div className="h-4 w-8 bg-emerald-500 rounded-full relative"><div className="absolute right-1 top-1 h-2 w-2 bg-white rounded-full" /></div>
+                 <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm">
+                    <h3 className="text-sm font-black text-gray-400 uppercase tracking-widest mb-8">Response Time by Category</h3>
+                    <div className="space-y-6">
+                       {[
+                         { cat: "Land & property records", time: "26d avg", color: "text-rose-600" },
+                         { cat: "FIR & police matters", time: "24d avg", color: "text-rose-600" },
+                         { cat: "Tenders & contracts", time: "19d avg", color: "text-amber-600" },
+                         { cat: "Road & civic works", time: "17d avg", color: "text-amber-600" },
+                         { cat: "Welfare schemes", time: "13d avg", color: "text-emerald-600" },
+                         { cat: "Education records", time: "11d avg", color: "text-emerald-600" },
+                       ].map((cat, i) => (
+                          <div key={i} className="flex justify-between items-center group">
+                             <div className="text-sm font-bold text-gray-600 group-hover:text-gray-900 transition-colors">{cat.cat}</div>
+                             <div className={`text-sm font-black ${cat.color}`}>{cat.time}</div>
+                          </div>
+                       ))}
+                       <div className="pt-6 border-t border-gray-50 flex justify-between items-center">
+                          <div className="text-sm font-black text-gray-900">Statutory limit</div>
+                          <div className="text-sm font-black text-gray-900">30 days</div>
                        </div>
                     </div>
-                    <button className="w-full mt-8 py-4 bg-white text-primary rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-blue-50 transition-all relative z-10">Manage Disclosure Rules</button>
-                  </div>
-                </div>
+                 </div>
               </div>
 
-              {/* Public Request Archive Monitoring */}
-              <div className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
-                <div className="p-8 border-b border-gray-50 flex justify-between items-center bg-gray-50/50">
-                  <div>
-                    <h2 className="text-lg font-black text-gray-900">Public Archive Live Feed</h2>
-                    <p className="text-xs text-gray-500">Auto-published responses in machine-readable JSON/CSV formats.</p>
-                  </div>
-                  <button className="px-6 py-3 bg-primary text-white rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-primary/20">Open Public Portal</button>
-                </div>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left">
-                    <thead className="bg-gray-50/50 text-[10px] font-black text-gray-400 uppercase tracking-widest">
-                      <tr>
-                        <th className="px-8 py-5">Topic</th>
-                        <th className="px-8 py-5">Dept</th>
-                        <th className="px-8 py-5">Published</th>
-                        <th className="px-8 py-5">Format</th>
-                        <th className="px-8 py-5 text-right">Views</th>
-                      </tr>
-                    </thead>
-                    <tbody className="text-sm">
-                      {[
-                        { topic: "State Infrastructure Budget FY 25", dept: "Finance", date: "Today, 09:00", format: "JSON/CSV" },
-                        { topic: "Primary School Staff List - Nalgonda", dept: "Education", date: "Today, 08:30", format: "CSV" },
-                        { topic: "Pollution Control Board Reports", dept: "Environment", date: "Yesterday", format: "JSON" },
-                      ].map((pub, i) => (
-                        <tr key={i} className="border-t border-gray-50 hover:bg-gray-50 transition-colors">
-                          <td className="px-8 py-5 font-bold text-gray-700">{pub.topic}</td>
-                          <td className="px-8 py-5 text-gray-500 font-medium">{pub.dept}</td>
-                          <td className="px-8 py-5 text-gray-500 font-medium">{pub.date}</td>
-                          <td className="px-8 py-5">
-                            <span className="px-2 py-1 bg-emerald-50 text-emerald-600 text-[8px] font-black rounded-md uppercase">{pub.format}</span>
-                          </td>
-                          <td className="px-8 py-5 text-right font-black text-primary">{(i+1)*1240}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+              {/* Advanced Proactive Metrics */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-10">
+                 {[
+                   { label: "Citizen Satisfaction", val: "4.8/5", sub: "Based on 1.2k reviews", icon: Award, color: "text-primary" },
+                   { label: "Appeal Disposal Rate", val: "92%", sub: "Legal compliance high", icon: Gavel, color: "text-secondary" },
+                   { label: "Data Openness Index", val: "A+", sub: "Top performing state", icon: Database, color: "text-emerald-600" },
+                 ].map((stat, i) => (
+                    <div key={i} className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm flex items-center gap-6 group hover:shadow-lg transition-all">
+                       <div className="h-14 w-14 bg-gray-50 rounded-2xl flex items-center justify-center text-gray-400 group-hover:bg-primary/5 group-hover:text-primary transition-colors">
+                          <stat.icon className={`h-7 w-7`} />
+                       </div>
+                       <div>
+                          <div className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">{stat.label}</div>
+                          <div className="text-2xl font-black text-gray-900">{stat.val}</div>
+                          <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{stat.sub}</div>
+                       </div>
+                    </div>
+                 ))}
               </div>
             </motion.div>
           ) : (
