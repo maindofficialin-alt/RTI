@@ -20,7 +20,10 @@ import {
   Coins,
   Handshake,
   ArrowRight,
-  Info
+  Info,
+  Zap,
+  Bell,
+  Database
 } from "lucide-react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { apiRequest, getUser, isLoggedIn, logout } from "@/lib/api";
@@ -126,9 +129,206 @@ export default function Dashboard() {
       <div className="container mx-auto px-4 py-8">
         <AnimatePresence mode="wait">
           {isAdmin ? (
-            /* ADMIN VIEW (Omitted for brevity, assuming same as before but fetching real apps) */
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-8">
-               <div className="p-12 text-center text-gray-400 font-bold bg-white rounded-3xl border border-dashed">Admin Analytics Overview (Real-time sync enabled)</div>
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="space-y-8"
+            >
+              {/* Admin KPI Header */}
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                {adminStats.map((stat, i) => (
+                  <motion.div 
+                    key={i} 
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.1 }}
+                    className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm hover:shadow-md transition-all group"
+                  >
+                    <div className="flex justify-between items-start mb-4">
+                      <div className="h-10 w-10 bg-gray-50 rounded-xl flex items-center justify-center text-gray-400 group-hover:bg-primary/5 group-hover:text-primary transition-colors">
+                        <stat.icon className="h-5 w-5" />
+                      </div>
+                      <span className={`text-[10px] font-black px-2 py-1 rounded-md ${stat.trend.includes('+') ? 'bg-emerald-50 text-emerald-600' : 'bg-rose-50 text-rose-600'}`}>
+                        {stat.trend}
+                      </span>
+                    </div>
+                    <div className="text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1">{stat.label}</div>
+                    <div className={`text-2xl font-black ${stat.color}`}>{stat.value}</div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Next-Gen Admin Toolkit */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div className="lg:col-span-2 space-y-8">
+                  <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm">
+                    <div className="flex items-center justify-between mb-10">
+                      <div>
+                        <h2 className="text-xl font-black text-gray-900">AI Redaction Engine</h2>
+                        <p className="text-sm text-gray-500">Auto-identifying and masking sensitive data across departments.</p>
+                      </div>
+                      <div className="flex items-center gap-2 text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest">
+                        <ShieldAlert className="h-4 w-4" /> System Active
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-4">
+                      {[
+                        { file: "Financial_Audit_2025.pdf", dept: "Revenue", redactCount: 42, status: "Review Required" },
+                        { file: "Staff_Address_List.csv", dept: "Education", redactCount: 128, status: "Auto-Masked" },
+                        { file: "Bridge_Plan_Draft.jpg", dept: "PWD", redactCount: 0, status: "Clean" },
+                      ].map((item, i) => (
+                        <div key={i} className="p-4 bg-gray-50 rounded-2xl border border-gray-100 flex items-center justify-between group hover:border-primary/30 transition-all">
+                          <div className="flex items-center gap-4">
+                            <div className="h-10 w-10 bg-white rounded-xl flex items-center justify-center text-gray-400 group-hover:text-primary transition-colors">
+                              <FileText className="h-5 w-5" />
+                            </div>
+                            <div>
+                              <div className="text-sm font-bold text-gray-900">{item.file}</div>
+                              <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{item.dept} Department</div>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-6">
+                            <div className="text-center">
+                              <div className="text-xs font-black text-primary">{item.redactCount}</div>
+                              <div className="text-[8px] font-bold text-gray-400 uppercase">Flags</div>
+                            </div>
+                            <button className={`px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest ${
+                              item.status === 'Clean' ? 'bg-emerald-100 text-emerald-700' : 'bg-primary text-white'
+                            }`}>
+                              {item.status}
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm">
+                    <h2 className="text-xl font-black text-gray-900 mb-8">Single-window Routing Insights</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                       <div className="space-y-6">
+                          <div className="p-6 bg-indigo-50 rounded-2xl border border-indigo-100">
+                             <div className="text-2xl font-black text-indigo-600 mb-1">94.2%</div>
+                             <div className="text-[10px] font-black text-indigo-400 uppercase tracking-widest">Auto-Routing Accuracy</div>
+                             <p className="text-xs text-indigo-600/70 mt-4 leading-relaxed">AI correctly identified target departments for 1.2M requests this month.</p>
+                          </div>
+                          <div className="p-6 bg-amber-50 rounded-2xl border border-amber-100">
+                             <div className="text-2xl font-black text-amber-600 mb-1">2.4 Hours</div>
+                             <div className="text-[10px] font-black text-amber-400 uppercase tracking-widest">Avg. Initial Assignment</div>
+                             <p className="text-xs text-amber-600/70 mt-4 leading-relaxed">Down from 72 hours since implementing NLP-based triage.</p>
+                          </div>
+                       </div>
+                       <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100">
+                          <h4 className="text-xs font-black text-gray-400 uppercase tracking-widest mb-4">Common Triage Conflict</h4>
+                          <div className="space-y-4">
+                             {[
+                               { label: "Revenue vs MAUD", val: 45, color: "bg-blue-500" },
+                               { label: "Home vs Law", val: 25, color: "bg-indigo-500" },
+                               { label: "Education vs BCW", val: 30, color: "bg-emerald-500" },
+                             ].map((risk, i) => (
+                               <div key={i} className="space-y-1.5">
+                                 <div className="flex justify-between text-[8px] font-black uppercase text-gray-500">
+                                   <span>{risk.label}</span>
+                                   <span>{risk.val}%</span>
+                                 </div>
+                                 <div className="h-1 w-full bg-gray-200 rounded-full overflow-hidden">
+                                   <div className={`h-full ${risk.color}`} style={{ width: `${risk.val}%` }} />
+                                 </div>
+                               </div>
+                             ))}
+                          </div>
+                          <button className="w-full mt-6 py-3 bg-white text-primary border border-gray-200 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-gray-50 transition-all">Refine NLP Model</button>
+                       </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-8">
+                  <div className="bg-rose-50 p-8 rounded-3xl border border-rose-100 shadow-sm">
+                    <h2 className="text-lg font-black text-rose-600 mb-8 flex items-center gap-2">
+                      <Clock className="h-5 w-5" /> Deadline Alerts
+                    </h2>
+                    <div className="space-y-6">
+                       {[
+                         { id: "TSRTI/2026/044", time: "Expired 2 days ago", dept: "Municipal Admin", level: "Critical" },
+                         { id: "TSRTI/2026/128", time: "Due in 18 hours", dept: "Health & FW", level: "High" },
+                         { id: "TSRTI/2026/089", time: "Due in 3 days", dept: "Police Dept", level: "Warning" },
+                       ].map((alert, i) => (
+                         <div key={i} className="flex gap-4">
+                            <div className={`h-2 w-2 rounded-full mt-2 shrink-0 ${
+                              alert.level === 'Critical' ? 'bg-rose-600 animate-pulse' : (alert.level === 'High' ? 'bg-amber-500' : 'bg-blue-500')
+                            }`} />
+                            <div>
+                               <div className="text-[10px] font-black text-rose-600/60 uppercase">{alert.time}</div>
+                               <div className="font-bold text-gray-900 text-sm">{alert.id}</div>
+                               <div className="text-[10px] font-bold text-gray-400 uppercase">{alert.dept}</div>
+                            </div>
+                         </div>
+                       ))}
+                       <button className="w-full mt-4 py-4 bg-rose-600 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-rose-700 transition-all shadow-lg shadow-rose-200">Send Escalation Notices</button>
+                    </div>
+                  </div>
+
+                  <div className="bg-indigo-900 p-8 rounded-3xl text-white shadow-xl relative overflow-hidden">
+                    <Fingerprint className="absolute -bottom-4 -right-4 h-32 w-32 text-white/5" />
+                    <h3 className="text-xl font-black mb-4 relative z-10">Proactive Disclosure Control</h3>
+                    <p className="text-xs text-indigo-200 mb-8 leading-relaxed relative z-10">Configuring automatic publication of 128 "High Demand" datasets to the Public Archive.</p>
+                    <div className="space-y-4 relative z-10">
+                       <div className="flex items-center justify-between p-3 bg-white/10 rounded-xl">
+                          <span className="text-[10px] font-bold uppercase tracking-widest">Tender Archive</span>
+                          <div className="h-4 w-8 bg-emerald-500 rounded-full relative"><div className="absolute right-1 top-1 h-2 w-2 bg-white rounded-full" /></div>
+                       </div>
+                       <div className="flex items-center justify-between p-3 bg-white/10 rounded-xl">
+                          <span className="text-[10px] font-bold uppercase tracking-widest">Budget Live-sync</span>
+                          <div className="h-4 w-8 bg-emerald-500 rounded-full relative"><div className="absolute right-1 top-1 h-2 w-2 bg-white rounded-full" /></div>
+                       </div>
+                    </div>
+                    <button className="w-full mt-8 py-4 bg-white text-primary rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-blue-50 transition-all relative z-10">Manage Disclosure Rules</button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Public Request Archive Monitoring */}
+              <div className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
+                <div className="p-8 border-b border-gray-50 flex justify-between items-center bg-gray-50/50">
+                  <div>
+                    <h2 className="text-lg font-black text-gray-900">Public Archive Live Feed</h2>
+                    <p className="text-xs text-gray-500">Auto-published responses in machine-readable JSON/CSV formats.</p>
+                  </div>
+                  <button className="px-6 py-3 bg-primary text-white rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-primary/20">Open Public Portal</button>
+                </div>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left">
+                    <thead className="bg-gray-50/50 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                      <tr>
+                        <th className="px-8 py-5">Topic</th>
+                        <th className="px-8 py-5">Dept</th>
+                        <th className="px-8 py-5">Published</th>
+                        <th className="px-8 py-5">Format</th>
+                        <th className="px-8 py-5 text-right">Views</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-sm">
+                      {[
+                        { topic: "State Infrastructure Budget FY 25", dept: "Finance", date: "Today, 09:00", format: "JSON/CSV" },
+                        { topic: "Primary School Staff List - Nalgonda", dept: "Education", date: "Today, 08:30", format: "CSV" },
+                        { topic: "Pollution Control Board Reports", dept: "Environment", date: "Yesterday", format: "JSON" },
+                      ].map((pub, i) => (
+                        <tr key={i} className="border-t border-gray-50 hover:bg-gray-50 transition-colors">
+                          <td className="px-8 py-5 font-bold text-gray-700">{pub.topic}</td>
+                          <td className="px-8 py-5 text-gray-500 font-medium">{pub.dept}</td>
+                          <td className="px-8 py-5 text-gray-500 font-medium">{pub.date}</td>
+                          <td className="px-8 py-5">
+                            <span className="px-2 py-1 bg-emerald-50 text-emerald-600 text-[8px] font-black rounded-md uppercase">{pub.format}</span>
+                          </td>
+                          <td className="px-8 py-5 text-right font-black text-primary">{(i+1)*1240}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </motion.div>
           ) : (
             <motion.div key="citizen-content" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="grid grid-cols-1 lg:grid-cols-3 gap-8">

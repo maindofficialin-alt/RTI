@@ -10,7 +10,13 @@ import {
   Landmark,
   Scale,
   Gavel,
-  Users
+  Users,
+  Activity,
+  EyeOff,
+  Zap,
+  Database,
+  Bell,
+  CheckCircle2
 } from "lucide-react";
 import Link from "next/link";
 
@@ -214,6 +220,100 @@ export default function Home() {
             <Link href="/grievance" className="px-10 py-5 bg-secondary text-primary font-black rounded-2xl hover:bg-secondary-light transition-all shadow-xl shadow-secondary/20 flex items-center gap-3 mx-auto w-fit">
               Open Grievance Portal <ArrowRight className="h-5 w-5" />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Next-Gen Features Section */}
+      <section className="py-24 bg-gray-50 border-y border-gray-100">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="inline-block px-4 py-1.5 bg-indigo-50 text-indigo-600 text-[10px] font-black rounded-full mb-4 uppercase tracking-widest">Innovation Spotlight</div>
+            <h2 className="text-4xl font-black text-gray-900 mb-6">Next-Gen <span className="text-primary">Transparency</span> Engine</h2>
+            <p className="text-gray-500 font-medium">Leveraging AI and modern data architecture to build India's most advanced Right to Information portal.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              { 
+                title: "Public Request Archive", 
+                desc: "Explore a searchable database of all past RTI requests and official responses to find info instantly.",
+                icon: FileText,
+                color: "text-blue-600",
+                bg: "bg-blue-50"
+              },
+              { 
+                title: "AI Document Processing", 
+                desc: "Intelligent auto-redaction of sensitive personal info using LLMs before officer review.",
+                icon: ShieldCheck,
+                color: "text-purple-600",
+                bg: "bg-purple-50"
+              },
+              { 
+                title: "Real-time Dashboard", 
+                desc: "Live visibility into department backlogs, average response times, and disposal rates.",
+                icon: Activity,
+                color: "text-amber-600",
+                bg: "bg-amber-50"
+              },
+              { 
+                title: "Anonymous Submissions", 
+                desc: "Privacy-first filing mode allowing citizens to request info without exposing identity to departments.",
+                icon: EyeOff,
+                color: "text-gray-600",
+                bg: "bg-gray-100"
+              },
+              { 
+                title: "Single-window Routing", 
+                desc: "Smart NLP engine that auto-routes your request to the correct department and PIO based on content.",
+                icon: Zap,
+                color: "text-yellow-600",
+                bg: "bg-yellow-50"
+              },
+              { 
+                title: "Open Data Delivery", 
+                desc: "Download responses in machine-readable JSON/CSV formats for research and data journalism.",
+                icon: Database,
+                color: "text-emerald-600",
+                bg: "bg-emerald-50"
+              },
+              { 
+                title: "Crowdsourcing Tools", 
+                desc: "Collaborate on batch requests for complex investigations involving multiple public authorities.",
+                icon: Users,
+                color: "text-indigo-600",
+                bg: "bg-indigo-50"
+              },
+              { 
+                title: "Automated Deadline Alerts", 
+                desc: "Smart notifications for PIOs and citizens when a response is nearing the 30-day statutory limit.",
+                icon: Bell,
+                color: "text-rose-600",
+                bg: "bg-rose-50"
+              },
+              { 
+                title: "Proactive Disclosure", 
+                desc: "Auto-publishing of frequently requested datasets without waiting for individual RTI filings.",
+                icon: CheckCircle2,
+                color: "text-cyan-600",
+                bg: "bg-cyan-50"
+              }
+            ].map((feature, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.05 }}
+                className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group"
+              >
+                <div className={`h-14 w-14 ${feature.bg} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+                  <feature.icon className={`h-7 w-7 ${feature.color}`} />
+                </div>
+                <h3 className="text-xl font-black text-gray-900 mb-3">{feature.title}</h3>
+                <p className="text-sm text-gray-500 leading-relaxed">{feature.desc}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
