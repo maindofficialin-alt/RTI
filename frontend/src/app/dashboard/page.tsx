@@ -23,7 +23,8 @@ import {
   Info,
   Zap,
   Bell,
-  Database
+  Database,
+  Gavel
 } from "lucide-react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { apiRequest, getUser, isLoggedIn, logout } from "@/lib/api";
@@ -383,7 +384,7 @@ export default function Dashboard() {
                         </div>
                         <div>
                           <div className="text-[10px] text-gray-400 uppercase font-black tracking-widest">Applied On</div>
-                          <div className="font-bold text-gray-700">{app.createdAt.split('T')[0]}</div>
+                           <div className="font-bold text-gray-700">{app.createdAt?.split('T')[0] || "N/A"}</div>
                         </div>
                       </div>
                       <div className="flex gap-3 pt-6 border-t border-gray-50">
@@ -624,9 +625,9 @@ export default function Dashboard() {
                        <div className="text-[10px] font-bold text-gray-500 uppercase">
                           Replied By: <span className="text-primary">{selectedApp.response?.repliedBy || "PIO Officer"}</span>
                        </div>
-                       <div className="text-[10px] font-bold text-gray-500 uppercase">
-                          Date: <span className="text-primary">{selectedApp.response?.repliedOn || selectedApp.updatedAt.split('T')[0]}</span>
-                       </div>
+                        <div className="text-[10px] font-bold text-gray-500 uppercase">
+                           Date: <span className="text-primary">{selectedApp.response?.repliedOn || selectedApp.updatedAt?.split('T')[0] || "N/A"}</span>
+                        </div>
                     </div>
                  </div>
 
