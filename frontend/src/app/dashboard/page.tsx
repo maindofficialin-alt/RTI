@@ -432,7 +432,164 @@ export default function Dashboard() {
               </div>
             </motion.div>
           )}
-        </AnimatePresence>
+       </AnimatePresence>
+
+      {/* Deep Analytics View (Department Detail) */}
+      <AnimatePresence>
+        {selectedDept && (
+          <motion.div 
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            className="fixed inset-0 z-50 bg-white overflow-y-auto"
+          >
+            <div className="bg-[#F8FAFC] min-h-screen">
+              <div className="bg-white border-b border-gray-100 sticky top-0 z-10">
+                <div className="container mx-auto px-6 py-6 flex justify-between items-center">
+                   <div className="flex items-center gap-6">
+                      <button onClick={() => setSelectedDept(null)} className="h-12 w-12 bg-gray-50 rounded-2xl flex items-center justify-center text-gray-400 hover:text-primary transition-all">
+                         <ArrowRight className="h-6 w-6 rotate-180" />
+                      </button>
+                      <div>
+                         <h2 className="text-2xl font-black text-gray-900">{selectedDept} Performance</h2>
+                         <div className="flex items-center gap-2 mt-1">
+                            <span className="h-2 w-2 bg-emerald-500 rounded-full" />
+                            <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Real-time Deep Data Stream</span>
+                         </div>
+                      </div>
+                   </div>
+                   <div className="flex gap-3">
+                      <button className="px-6 py-3 bg-gray-100 text-gray-600 rounded-xl text-xs font-black hover:bg-gray-200 transition-all">Download Audit</button>
+                      <button className="px-6 py-3 bg-primary text-white rounded-xl text-xs font-black shadow-lg shadow-primary/20 hover:-translate-y-0.5 transition-all">Configure Disclosure</button>
+                   </div>
+                </div>
+              </div>
+
+              <div className="container mx-auto px-6 py-10 space-y-8">
+                 {/* Advanced Metrics Grid */}
+                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    {[
+                      { label: "Staff Load", val: "128 RTI/Officer", sub: "High demand area", color: "text-amber-600" },
+                      { label: "Appeal Rate", val: "1.2%", sub: "Legal accuracy high", color: "text-emerald-600" },
+                      { label: "Avg response", val: "14 Days", sub: "Target: 30 Days", color: "text-primary" },
+                      { label: "Satisfaction", val: "4.9/5", sub: "Public trust high", color: "text-secondary" },
+                    ].map((stat, i) => (
+                       <div key={i} className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm">
+                          <div className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">{stat.label}</div>
+                          <div className={`text-3xl font-black ${stat.color} mb-1`}>{stat.val}</div>
+                          <div className="text-[10px] font-bold text-gray-400">{stat.sub}</div>
+                       </div>
+                    ))}
+                 </div>
+
+                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div className="lg:col-span-2 bg-white p-10 rounded-[3rem] border border-gray-100 shadow-sm relative overflow-hidden">
+                       <div className="absolute top-0 right-0 p-10 opacity-5">
+                          <Activity className="h-32 w-32" />
+                       </div>
+                       <h3 className="text-xl font-black text-gray-900 mb-8">Monthly Disposal Velocity</h3>
+                       <div className="flex items-end gap-6 h-64">
+                          {[65, 45, 85, 30, 95, 75, 55, 90, 40, 80, 70, 85].map((h, i) => (
+                             <div key={i} className="flex-grow group relative">
+                                <motion.div 
+                                   initial={{ height: 0 }}
+                                   animate={{ height: `${h}%` }}
+                                   className={`w-full rounded-2xl transition-all cursor-pointer ${i === 4 ? 'bg-primary shadow-lg shadow-primary/30' : 'bg-primary/5 hover:bg-primary/20'}`}
+                                />
+                                <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-gray-900 text-white px-2 py-1 rounded text-[8px] font-black opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                                   {h}% Responded
+                                </div>
+                             </div>
+                          ))}
+                       </div>
+                       <div className="flex justify-between text-[10px] font-black text-gray-400 uppercase tracking-widest mt-8 px-2">
+                          <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span>
+                       </div>
+                    </div>
+
+                    <div className="space-y-8">
+                       <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm">
+                          <h3 className="text-lg font-black text-gray-900 mb-6">Resource Allocation Insights</h3>
+                          <div className="space-y-6">
+                             <div className="p-5 bg-amber-50 rounded-2xl border border-amber-100">
+                                <div className="flex items-center gap-3 mb-2">
+                                   <div className="h-8 w-8 bg-amber-100 rounded-xl flex items-center justify-center text-amber-600">
+                                      <Zap className="h-4 w-4" />
+                                   </div>
+                                   <div className="text-xs font-black text-amber-900 uppercase">Optimization Alert</div>
+                                </div>
+                                <p className="text-xs text-amber-700 leading-relaxed font-medium">
+                                   High load detected in Land records. Suggesting 2 extra PIOs from Education department for temporary assistance.
+                                </p>
+                             </div>
+                             <div className="p-5 bg-emerald-50 rounded-2xl border border-emerald-100">
+                                <div className="flex items-center gap-3 mb-2">
+                                   <div className="h-8 w-8 bg-emerald-100 rounded-xl flex items-center justify-center text-emerald-600">
+                                      <CheckCircle2 className="h-4 w-4" />
+                                   </div>
+                                   <div className="text-xs font-black text-emerald-900 uppercase">Efficiency Peak</div>
+                                </div>
+                                <p className="text-xs text-emerald-700 leading-relaxed font-medium">
+                                   AI Redaction engine reduced review time by 42% this month. Maintaining current staff levels.
+                                </p>
+                             </div>
+                          </div>
+                       </div>
+
+                       <div className="bg-gray-900 p-8 rounded-3xl text-white shadow-xl relative overflow-hidden">
+                          <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16 blur-2xl" />
+                          <h4 className="text-lg font-black mb-4 relative z-10">Officer In-charge</h4>
+                          <div className="flex items-center gap-4 relative z-10">
+                             <div className="h-14 w-14 bg-white/10 rounded-2xl flex items-center justify-center font-black text-xl">AD</div>
+                             <div>
+                                <div className="text-sm font-black uppercase tracking-widest">Admin</div>
+                                <div className="text-[10px] font-bold text-gray-400 uppercase">Chief Information Officer</div>
+                             </div>
+                          </div>
+                          <button className="w-full mt-8 py-4 bg-white text-gray-900 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-gray-100 transition-all relative z-10">Contact Admin</button>
+                       </div>
+                    </div>
+                 </div>
+
+                 <div className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
+                    <div className="p-8 border-b border-gray-50 flex justify-between items-center">
+                       <h3 className="text-lg font-black text-gray-900 uppercase tracking-tight">AI-Extracted Common Topics</h3>
+                    </div>
+                    <div className="overflow-x-auto">
+                       <table className="w-full text-left">
+                          <thead className="bg-gray-50/50 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                             <tr>
+                                <th className="px-8 py-5">Topic Pattern</th>
+                                <th className="px-8 py-5">Frequency</th>
+                                <th className="px-8 py-5">Avg Complexity</th>
+                                <th className="px-8 py-5">Status</th>
+                             </tr>
+                          </thead>
+                          <tbody className="text-sm">
+                             {[
+                               { topic: "Land Title Verification - Rural", freq: "High (452)", complex: "Moderate", status: "Auto-Routed" },
+                               { topic: "Illegal Construction Complaints", freq: "Medium (210)", complex: "High", status: "Escalated" },
+                               { topic: "Encroachment Records (Last 50 Years)", freq: "Low (45)", complex: "Very High", status: "In-Progress" },
+                             ].map((t, i) => (
+                                <tr key={i} className="border-t border-gray-50 hover:bg-gray-50 transition-colors">
+                                   <td className="px-8 py-5 font-bold text-gray-700">{t.topic}</td>
+                                   <td className="px-8 py-5 text-gray-500 font-medium">{t.freq}</td>
+                                   <td className="px-8 py-5 text-gray-500 font-medium">{t.complex}</td>
+                                   <td className="px-8 py-5">
+                                      <span className="px-2 py-1 bg-primary/5 text-primary text-[8px] font-black rounded-md uppercase">{t.status}</span>
+                                   </td>
+                                </tr>
+                             ))}
+                          </tbody>
+                       </table>
+                    </div>
+                 </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       </div>
 
       {/* Response Detail Modal */}
