@@ -244,29 +244,38 @@ export default function Dashboard() {
               </div>
 
               {/* Workload & Category Analytics */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                 <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm">
-                    <h3 className="text-sm font-black text-gray-400 uppercase tracking-widest mb-8">Department Workload</h3>
-                    <div className="space-y-6">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                 <div className="lg:col-span-2 bg-white p-8 rounded-3xl border border-gray-100 shadow-sm">
+                    <div className="flex justify-between items-center mb-10">
+                       <h3 className="text-sm font-black text-gray-400 uppercase tracking-widest">Department Workload & Deep Analytics</h3>
+                       <div className="text-[10px] font-black text-primary bg-primary/5 px-3 py-1 rounded-full uppercase tracking-widest">Click department for deep-dive</div>
+                    </div>
+                    <div className="space-y-4">
                        {[
-                         { name: "Roads & Buildi...", val: 23, total: 30, color: "bg-rose-500" },
-                         { name: "Revenue", val: 16, total: 30, color: "bg-amber-500" },
-                         { name: "GHMC", val: 14, total: 30, color: "bg-amber-500" },
-                         { name: "Panchayat Raj", val: 10, total: 30, color: "bg-blue-500" },
-                         { name: "Health & FW", val: 8, total: 30, color: "bg-blue-500" },
-                         { name: "Agriculture", val: 5, total: 30, color: "bg-emerald-500" },
-                         { name: "Others", val: 8, total: 30, color: "bg-gray-400" },
+                         { name: "Higher Education", val: 1540, total: 2000, color: "bg-indigo-500", pio: "Admin", satisfaction: 4.8, appeal: "1.2%" },
+                         { name: "Health & Family Welfare", val: 2210, total: 3000, color: "bg-rose-500", pio: "Admin", satisfaction: 3.9, appeal: "4.5%" },
+                         { name: "Revenue Department", val: 3500, total: 4000, color: "bg-emerald-500", pio: "Admin", satisfaction: 4.9, appeal: "0.8%" },
+                         { name: "Home Affairs", val: 1800, total: 2500, color: "bg-blue-500", pio: "Admin", satisfaction: 4.2, appeal: "2.1%" },
+                         { name: "Municipal Admin (MAUD)", val: 1240, total: 2000, color: "bg-amber-500", pio: "Admin", satisfaction: 4.5, appeal: "1.5%" },
+                         { name: "BC Welfare", val: 890, total: 1500, color: "bg-indigo-400", pio: "Admin", satisfaction: 4.7, appeal: "0.5%" },
+                         { name: "Irrigation & CAD", val: 670, total: 1000, color: "bg-cyan-500", pio: "Admin", satisfaction: 4.1, appeal: "3.2%" },
                        ].map((dept, i) => (
-                          <div key={i} className="flex items-center gap-6">
-                             <div className="w-24 text-[11px] font-black text-gray-600 truncate">{dept.name}</div>
-                             <div className="flex-grow h-2 bg-gray-100 rounded-full overflow-hidden">
+                          <div 
+                            key={i} 
+                            onClick={() => setSelectedDept(dept.name)}
+                            className="flex items-center gap-6 p-4 rounded-2xl hover:bg-gray-50 transition-all cursor-pointer group border border-transparent hover:border-gray-200 shadow-sm hover:shadow-md"
+                          >
+                             <div className="w-40 text-sm font-black text-gray-700 group-hover:text-primary transition-colors">{dept.name}</div>
+                             <div className="flex-grow h-3 bg-gray-100 rounded-full overflow-hidden">
                                 <motion.div 
                                    initial={{ width: 0 }}
                                    animate={{ width: `${(dept.val / dept.total) * 100}%` }}
-                                   className={`h-full ${dept.color}`}
+                                   className={`h-full ${dept.color} shadow-[0_0_10px_rgba(0,0,0,0.1)]`}
                                 />
                              </div>
-                             <div className="w-4 text-xs font-black text-gray-900 text-right">{dept.val}</div>
+                             <div className="w-12 text-xs font-black text-gray-900 text-right">{dept.val}</div>
+                             <div className="w-20 text-[10px] font-bold text-gray-400 uppercase text-right">PIO: {dept.pio}</div>
+                             <ArrowRight className="h-4 w-4 text-gray-300 group-hover:text-primary group-hover:translate-x-1 transition-all" />
                           </div>
                        ))}
                     </div>
