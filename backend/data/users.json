@@ -1,18 +1,19 @@
 [
   {
-    "id": "9d867512-b192-400f-ae6e-2b88faf5eddf",
+    "id": "30f63dd4-b1d6-43a4-a010-22b5f190b3ad",
     "name": "Admin",
     "email": "admin@gmail.com",
-    "password": "$2a$10$vJSP.XBN1Dl1JLhSafPIPu7mj8mXLChzB7EBD3HhXQ7z7Jtujkj2W",
+    "password": "$2a$10$xn6Jx6H/oTvePV6gO30R9egMDNCD9xGCIirlT.7tV7DQbBGMMNM4.",
     "role": "admin",
-    "createdAt": "2026-05-04T18:23:49.809Z"
+    "createdAt": "2026-05-05T07:14:04.906Z"
   },
   {
-    "id": "daf3a7bb-2e39-419b-91bc-d036f7f9f366",
-    "name": "Srinivas Kumar",
+    "id": "srinivas-demo-id-123",
+    "name": "Srinivas",
     "email": "srinivas@example.com",
-    "password": "$2a$10$vJSP.XBN1Dl1JLhSafPIPu6XN2W2Ex3KPz3qqheCOs.stJHU0NZOO",
+    "password": "$2a$10$xn6Jx6H/oTvePV6gO30R9eyz/l30JhT0tjOSdvY1JJCgoo4TOwj3K",
     "role": "citizen",
-    "createdAt": "2026-05-04T18:23:49.885Z"
+    "location": "HYDERABAD, TELANGANA",
+    "createdAt": "2026-05-05T07:14:05.005Z"
   }
 ]

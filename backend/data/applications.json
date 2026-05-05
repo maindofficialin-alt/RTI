@@ -1,56 +1,91 @@
 [
   {
-    "id": "57d0d09b-243f-416a-b00b-86acfadd624e",
-    "registrationNumber": "TSRTI/2026/001",
-    "userId": "demo",
-    "applicantName": "John Doe",
-    "email": "john@example.com",
+    "id": "19460ca4-6ba6-4cb6-afbf-619be735af16",
+    "registrationNumber": "TSRTI/2026/0842",
+    "userId": "srinivas-demo-id-123",
+    "applicantName": "Srinivas",
+    "email": "srinivas@example.com",
     "phone": "9876543210",
-    "address": "123 Main St, Hyderabad",
+    "address": "Plot 42, Jubilee Hills, Hyderabad",
     "departmentId": "dept-10",
-    "departmentName": "Higher Education",
+    "departmentName": "Higher Education Department",
     "pioId": "pio-19",
     "pioName": "Shri. S. Kumar",
-    "subject": "Information about scholarship disbursement",
-    "description": "Requesting details of scholarship amounts disbursed in 2025-26.",
-    "status": "Pending",
-    "documents": [],
-    "timeline": [
+    "subject": "Inquiry on Infrastructure Funds for Government Degree Colleges",
+    "description": "Detailed inquiry regarding the allocation and utilization of infrastructure funds for Government Degree Colleges in Hyderabad district for the academic year 2025-26.",
+    "status": "Processing",
+    "documents": [
       {
-        "date": "2026-04-16",
-        "message": "Application received and assigned to PIO."
-      },
-      {
-        "date": "2026-04-15",
-        "message": "Application submitted online."
+        "name": "Infrastructure_Response_Note.pdf",
+        "url": "/uploads/mock-response-1.pdf",
+        "size": 1024567
       }
     ],
-    "createdAt": "2026-04-15T10:00:00Z",
-    "updatedAt": "2026-04-16T09:00:00Z"
-  },
-  {
-    "id": "1e50bce1-60e4-4ad9-81aa-fadf1b1f998c",
-    "registrationNumber": "TSRTI/2026/002",
-    "userId": "anonymous",
-    "applicantName": "hemanth",
-    "email": "hemanth@gmail.com",
-    "phone": "7777777777",
-    "address": "12 hyderabad",
-    "departmentId": "dept-2",
-    "departmentName": "Animal Husbandry, Dairy Development & Fisheries",
-    "pioId": "pio-3",
-    "pioName": "Shri. B. Srinivas",
-    "subject": "required info ",
-    "description": "need a specific informatiom",
-    "status": "Pending",
-    "documents": [],
     "timeline": [
       {
         "date": "2026-05-05",
-        "message": "Application submitted online."
+        "time": "10:30 AM",
+        "message": "Final Response Uploaded"
+      },
+      {
+        "date": "2026-05-04",
+        "message": "Payment verified"
+      },
+      {
+        "date": "2026-04-15",
+        "message": "RTI Submitted"
       }
     ],
-    "createdAt": "2026-05-05T06:15:33.922Z",
-    "updatedAt": "2026-05-05T06:15:33.922Z"
+    "response": {
+      "text": "The department has reviewed your request regarding infrastructure funds. Total allocation for 2025-26 is ₹15.5 Crores. Detailed breakdown is attached in the response PDF.",
+      "repliedBy": "Shri. S. Kumar (PIO)",
+      "repliedOn": "2026-05-05"
+    },
+    "createdAt": "2026-04-15T09:00:00Z",
+    "updatedAt": "2026-05-05T10:30:00Z"
+  },
+  {
+    "id": "1f98eced-c2a6-46ee-b06c-e92030bf130f",
+    "registrationNumber": "TSRTI/2026/0521",
+    "userId": "srinivas-demo-id-123",
+    "applicantName": "Srinivas",
+    "email": "srinivas@example.com",
+    "phone": "9876543210",
+    "address": "Plot 42, Jubilee Hills, Hyderabad",
+    "departmentId": "dept-10",
+    "departmentName": "Higher Education Department",
+    "pioId": "pio-19",
+    "pioName": "Shri. S. Kumar",
+    "subject": "Faculty Vacancy Report - Osmania University Affiliated Colleges",
+    "description": "Requesting the current status of faculty vacancies in all Osmania University affiliated government colleges as of March 2026.",
+    "status": "Completed",
+    "documents": [
+      {
+        "name": "Faculty_Vacancy_Report_March2026.pdf",
+        "url": "/uploads/mock-response-2.pdf",
+        "size": 450000
+      }
+    ],
+    "timeline": [
+      {
+        "date": "2026-04-05",
+        "message": "Application Completed and Information Provided"
+      },
+      {
+        "date": "2026-03-25",
+        "message": "Under Review by Department"
+      },
+      {
+        "date": "2026-03-22",
+        "message": "RTI Submitted"
+      }
+    ],
+    "response": {
+      "text": "Information provided. There are currently 124 vacant positions across 15 government colleges affiliated with Osmania University. Recruitment process is initiated.",
+      "repliedBy": "Shri. S. Kumar (PIO)",
+      "repliedOn": "2026-04-05"
+    },
+    "createdAt": "2026-03-22T14:20:00Z",
+    "updatedAt": "2026-04-05T11:00:00Z"
   }
 ]

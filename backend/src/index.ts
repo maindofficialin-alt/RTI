@@ -27,13 +27,15 @@ function writeDB(file: string, data: any[]) {
 }
 
 // --- Seed default admin user if empty ---
+const SRINIVAS_ID = 'srinivas-demo-id-123';
+
 function seedUsers() {
   const users = readDB('users.json');
   if (users.length === 0) {
     const salt = bcrypt.genSaltSync(10);
     writeDB('users.json', [
       { id: uuidv4(), name: 'Admin', email: 'admin@gmail.com', password: bcrypt.hashSync('Admin@369', salt), role: 'admin', createdAt: new Date().toISOString() },
-      { id: uuidv4(), name: 'Srinivas Kumar', email: 'srinivas@example.com', password: bcrypt.hashSync('password123', salt), role: 'citizen', createdAt: new Date().toISOString() },
+      { id: SRINIVAS_ID, name: 'Srinivas', email: 'srinivas@example.com', password: bcrypt.hashSync('password123', salt), role: 'citizen', location: 'HYDERABAD, TELANGANA', createdAt: new Date().toISOString() },
     ]);
   }
 }
@@ -42,16 +44,70 @@ function seedUsers() {
 function seedRTI() {
   const apps = readDB('applications.json');
   if (apps.length === 0) {
-    writeDB('applications.json', [{
-      id: uuidv4(), registrationNumber: 'TSRTI/2026/001', userId: 'demo', applicantName: 'John Doe',
-      email: 'john@example.com', phone: '9876543210', address: '123 Main St, Hyderabad',
-      departmentId: 'dept-10', departmentName: 'Higher Education', pioId: 'pio-19', pioName: 'Shri. S. Kumar',
-      subject: 'Information about scholarship disbursement', description: 'Requesting details of scholarship amounts disbursed in 2025-26.',
-      status: 'Pending', documents: [], timeline: [
-        { date: '2026-04-16', message: 'Application received and assigned to PIO.' },
-        { date: '2026-04-15', message: 'Application submitted online.' },
-      ], createdAt: '2026-04-15T10:00:00Z', updatedAt: '2026-04-16T09:00:00Z',
-    }]);
+    writeDB('applications.json', [
+      {
+        id: uuidv4(), 
+        registrationNumber: 'TSRTI/2026/0842', 
+        userId: SRINIVAS_ID, 
+        applicantName: 'Srinivas',
+        email: 'srinivas@example.com', 
+        phone: '9876543210', 
+        address: 'Plot 42, Jubilee Hills, Hyderabad',
+        departmentId: 'dept-10', 
+        departmentName: 'Higher Education Department', 
+        pioId: 'pio-19', 
+        pioName: 'Shri. S. Kumar',
+        subject: 'Inquiry on Infrastructure Funds for Government Degree Colleges', 
+        description: 'Detailed inquiry regarding the allocation and utilization of infrastructure funds for Government Degree Colleges in Hyderabad district for the academic year 2025-26.',
+        status: 'Processing', 
+        documents: [
+          { name: 'Infrastructure_Response_Note.pdf', url: '/uploads/mock-response-1.pdf', size: 1024567 }
+        ], 
+        timeline: [
+          { date: '2026-05-05', time: '10:30 AM', message: 'Final Response Uploaded' },
+          { date: '2026-05-04', message: 'Payment verified' },
+          { date: '2026-04-15', message: 'RTI Submitted' },
+        ], 
+        response: {
+          text: "The department has reviewed your request regarding infrastructure funds. Total allocation for 2025-26 is ₹15.5 Crores. Detailed breakdown is attached in the response PDF.",
+          repliedBy: "Shri. S. Kumar (PIO)",
+          repliedOn: "2026-05-05"
+        },
+        createdAt: '2026-04-15T09:00:00Z', 
+        updatedAt: '2026-05-05T10:30:00Z',
+      },
+      {
+        id: uuidv4(), 
+        registrationNumber: 'TSRTI/2026/0521', 
+        userId: SRINIVAS_ID, 
+        applicantName: 'Srinivas',
+        email: 'srinivas@example.com', 
+        phone: '9876543210', 
+        address: 'Plot 42, Jubilee Hills, Hyderabad',
+        departmentId: 'dept-10', 
+        departmentName: 'Higher Education Department', 
+        pioId: 'pio-19', 
+        pioName: 'Shri. S. Kumar',
+        subject: 'Faculty Vacancy Report - Osmania University Affiliated Colleges', 
+        description: 'Requesting the current status of faculty vacancies in all Osmania University affiliated government colleges as of March 2026.',
+        status: 'Completed', 
+        documents: [
+          { name: 'Faculty_Vacancy_Report_March2026.pdf', url: '/uploads/mock-response-2.pdf', size: 450000 }
+        ], 
+        timeline: [
+          { date: '2026-04-05', message: 'Application Completed and Information Provided' },
+          { date: '2026-03-25', message: 'Under Review by Department' },
+          { date: '2026-03-22', message: 'RTI Submitted' },
+        ], 
+        response: {
+          text: "Information provided. There are currently 124 vacant positions across 15 government colleges affiliated with Osmania University. Recruitment process is initiated.",
+          repliedBy: "Shri. S. Kumar (PIO)",
+          repliedOn: "2026-04-05"
+        },
+        createdAt: '2026-03-22T14:20:00Z', 
+        updatedAt: '2026-04-05T11:00:00Z',
+      }
+    ]);
   }
 }
 
